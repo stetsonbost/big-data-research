@@ -55,3 +55,11 @@ This week, I shifted my focus away from studying big data analytics (machine lea
 # Sunday, June 4
 
 Today I thought about algorithms that could work for some of the example problems that Prof. Gu mentioned at our call last week. The simplest was perhaps a homework planning problem, where a student has assignments that must be completed by a certain date, and each assignment requires a certain amount of time or work to complete. We want to find the optimal way to arrange how the student is working on the assignments throughout the week even if the student has already done some work on previous days (i.e. the student has done work on Monday and Tuesday and are trying to distribute work for Wednesday, Thursday, and Friday). I think a relatively simple greedy algorithm can find the optimal solution to such a problem, but this is type of algorithm probably will not work for more complicated problems, such as constrained cases of the travelling salesperson problem.
+
+# Sunday, August 6
+
+It's been a long time since I updated this log, but I've been working on scheduling algorithms.
+
+We have decided that the name of the project will be "Adaptive Nested Algorithms for Balanced Scheduling", a name that will appear on a poster to be presented at HMC as well as our anticipated paper.
+
+A couple weeks ago (after pretty much finalizing the personal scheduling algorithms), we started focusing more on larger-scale events (i.e. those that involve multiple attendees). We think that this can be useful for events within an organization, especially where the schedules of the organization members are up-to-date and recorded in some centralized calendar application, such as Google Calendar or Microsoft's Outlook Calendar. It would be ideal if (ultimately) an event organizer could specify some details and constraints about a potential event (desired attendees, acceptable times for the event, etc.), and then an algorithm would propose a good time for the event to be scheduled -- and perhaps be integrated with a calendar application so that it could automatically create calendar invites. I will add more details about my recent progress on this type of problem tomorrow.
