@@ -1,0 +1,183 @@
+\documentclass{article}
+
+% if you need to pass options to natbib, use, e.g.:
+% \PassOptionsToPackage{numbers, compress}{natbib}
+% before loading nips_2017
+%
+% to avoid loading the natbib package, add option nonatbib:
+% \usepackage[nonatbib]{nips_2017}
+
+% \usepackage{nips_2017}
+
+% to compile a camera-ready version, add the [final] option, e.g.:
+\usepackage[final]{nips_2017}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+
+\newcommand{\todo}[1]{{\bf TODO #1}\\}
+
+\title{Adaptive, Nested Algorithms for Balanced Scheduling}
+
+% The \author macro works with any number of authors. There are two
+% commands used to separate the names and addresses of multiple
+% authors: \And and \AND.
+%
+% Using \And between authors leaves it to LaTeX to determine where to
+% break the lines. Using \AND forces a line break at that point. So,
+% if LaTeX puts 3 of 4 authors names on the first line, and the last
+% on the second line, try using \AND instead of \And before the third
+% author name.
+
+\author{
+  Stetson Bost\\
+  Department of Mathematics\\
+  Harvey Mudd College\\
+  Claremont, CA 91711 \\
+  \texttt{sbost@hmc.edu}\\
+}
+
+\begin{document}
+% \nipsfinalcopy is no longer used
+
+\maketitle
+
+\begin{abstract}
+Scheduling, adaptive algorithm, nested algorithm, machine learning, big data
+\end{abstract}
+
+\section{Scheduling}
+	Scheduling is a very large component of modern life.
+
+	\todo{Find details about scheduling, wellness, (work-life) balance, etc.}
+
+	In a fast-paced world, it can be important to effectively plan one's day in a way that is conducive to productivity while prioritizing the importance of a healthy balance between different types of activities. 
+
+	We developed an algorithm that aims to create balanced schedules that can be adapted to person to prioritize his or her needs.
+
+\section{Scheduling Problem}
+
+
+\section{Motivation}
+	The environment at a college campus is fast-paced and hectic more often than not.
+	Students are faced with many academic obligations, from doing homework to attending class to studying for exams.
+	While focusing on academics is important and necessary, it is also valuable to have a healthy balance of different activities to support a student's personal wellbeing.
+	There are many ways for students to arrange their schedules, but rarely does a ``one size fits all'' approach work for creating students' schedules.
+	Each person has a unique style of working and individual needs, so it makes sense that a person's schedule should be tailored to fit the person.
+
+	Additionally, schedules are inherently dynamic.
+	Events can be scheduled and canceled.
+	One may occasionally have to deal with an emergency that preclude all other scheduled activities.
+	Priorities can change.
+
+
+\section{Background}
+
+
+\section{Algorithm for Personal Scheduling}
+
+
+\section{Algorithms for Event Scheduling}
+
+\subsection{Probabilistic Approach}
+	Suppose we know the probabilities for all potential attendees that they will attend all possible events.
+	This means we can know how likely they are to attend a new event if it is scheduled for a particular time slot.
+	% Create a list with indices corresponding to the possible starting times.
+	% The list will ultimately hold the expected value for the number of people who will attend the event if it starts at a particular time.
+	Let $A$ be the list of attendees, $t$ be a possible start time, $p_a(t)$ be the probability that an attendee $a$ will attend the event if scheduled at time $t$, and $\mathbb{E}[t]$ be the expected value of attendees at time $t$.
+	Notice that for any particular start time $t$, if we sum all potential attendees' probability of attending, we will get the expected value of attendees at $t$.
+	For each potential attendee $a$, go through all possible start times $t$, add the probability $p_a(t)$ of $a$ attending at $t$ to the value in the index corresponding to $t$.
+	That is, 
+	\[ \mathbb{E}[t] = \sum_{a \in A} p_a(t). \]
+	If there are $m$ possible start times, then we can create a $1 \times m$ matrix $\mathbb{E}$ of the expected number of attendees at each time.
+	\[  % TODO Fix matrix formatting
+		\left[ \sum_{a \in A} p_a(t_1) \hspace{10} \sum_{a \in A} p_a(t_2) \hspace{10}  \cdots \hspace{10} \sum_{a \in A} p_a(t_n) \right]
+	\]
+
+
+
+\section{Data}
+	We have not yet used a real data set on which to test our algorithms.
+	Historic data could be collected from the Harvey Mudd community through a combination of techniques such as online surveys and in-person interviews.
+
+\newpage
+\section{Examples of Scheduling Problems}
+	There are many examples of personal scheduling problems that could be solved using similar algorithms.
+
+	One example, which will be explored later in this paper, is a college student making a weekly schedule that includes classes, homework, meals, free time, a job, sleep, etc.
+
+	Another example might be an (office) employee's work schedule. This can be considered on different time scales. For a day, the employee might need a schedule that includes when he or she should start and end, what time different tasks or meetings will take place, and when to have meals and breaks. With a longer timescale, such as a month or quarter, the employee might need to schedule which days to work on different projects, when training or business trips will take place, and when to take personal time off from work.
+
+	An elementary school teacher has required standards that his or her students must meet. The teacher must create a flexible schedule for the academic year that plans when to cover different topics in order to meet the requirements. Additionally, the teacher may need to plan for field trips, ``slack'' days (in case the class falls behind schedule), as well as incorporate a larger school-wide schedule including events such as assemblies, parent-teacher conferences, and breaks. The teacher may divide the topics into units, and the calendar into months or weeks. Depending on the pace of the class throughout the year, the schedule may need to be adjusted to either move faster or slower later on.
+
+	A family on vacation may have a list of activities they want to do while visiting a particular place before they leave.
+
+	The organizer of a conference may have a list of speakers that are going to give presentations. The organizer wants to schedule the speakers and breaks (for snacks, meals, etc.) such that the audience members generally remain engaged throughout the conference.
+
+\newpage
+\section{Goals for Schedules}
+	Make sure everything that is necessary gets done by the time it must be completed.
+
+	Make sure there is some reasonable/healthy amount of ``slack time'' of personal time (if applicable).
+
+	Want to design a cost function that can measure how ``balanced'' a schedule is
+
+	When some cost function is applied to some time period (day, week, etc.), we want to minimize variance in the total cost among the time periods.
+
+\newpage
+\section{Algorithm}
+	Each task has some time frame in which it must be completed and an associated intensity level corresponding roughly to the estimated amount of (mental) concentration needed to (effectively) perform the task. 
+
+	A schedule is made up of timeslots. For our algorithm, a \emph{timeslot} refers to the smallest period of time the algorithm will be dealing with. This can be 1 minute, 15 minutes, half an hour, 1 hour, etc.
+	The schedule is preliminarily divided into blocks of time.
+	(For our example, we use four- to five-hour blocks.)
+
+	There may be some tasks that have to occur at specific times (i.e.~meetings, classes, etc.) regardless of other tasks in the schedule.
+
+	The algorithm consists of three main parts.
+	\begin{enumerate}
+		\item Distribute the tasks into sections of the schedule (on a scale larger than blocks), where all tasks within a section will be completed by the end of section.
+		\item Assign tasks in each section to a block. 
+		\item Schedule tasks within each block.
+	\end{enumerate}
+
+\newpage
+\subsection{Tasks to Sections}
+\todo{}
+\vspace{2.5in}
+
+\subsection{Tasks to Blocks}
+\todo{}
+\vspace{2.5in}
+\subsection{Tasks to Timeslots}
+\todo{}
+
+\newpage
+\section{Personal Example}
+\todo{}
+\vspace{5in}
+
+
+
+\subsubsection*{Acknowledgments}
+\todo{}
+\section*{References}
+\todo{}
+
+%References follow the acknowledgments. Use unnumbered first-level
+%heading for the references. Any choice of citation style is acceptable
+%as long as you are consistent. It is permissible to reduce the font
+%size to \verb+small+ (9 point) when listing the references. {\bf
+%  Remember that you can go over 8 pages as long as the subsequent ones contain
+%  \emph{only} cited references.}
+%\medskip
+%
+%\small
+
+\end{document}
