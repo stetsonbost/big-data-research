@@ -21,9 +21,9 @@
 \usepackage{nicefrac}       % compact symbols for 1/2, etc.
 \usepackage{microtype}      % microtypography
 
-\newcommand{\todo}[1]{{\bf TODO #1}\\}
+\newcommand{\todo}[1]{}
 
-\title{Adaptive, Nested Algorithms for Balanced Scheduling}
+\title{Adaptive Nested Algorithms for Balanced Scheduling}
 
 % The \author macro works with any number of authors. There are two
 % commands used to separate the names and addresses of multiple
@@ -52,20 +52,16 @@
 Scheduling, adaptive algorithm, nested algorithm, machine learning, big data
 \end{abstract}
 
-\section{Scheduling}
-	Scheduling is a very large component of modern life.
-
-	\todo{Find details about scheduling, wellness, (work-life) balance, etc.}
-
-	In a fast-paced world, it can be important to effectively plan one's day in a way that is conducive to productivity while prioritizing the importance of a healthy balance between different types of activities. 
-
-	We developed an algorithm that aims to create balanced schedules that can be adapted to person to prioritize his or her needs.
-
 \section{Scheduling Problem}
+	Scheduling is a very large component of modern life.
+	\todo{``Find details about scheduling, wellness, (work-life) balance, etc.''}
+	In a fast-paced world, it can be important to effectively plan one's schedule in a way that is conducive to productivity while prioritizing the importance of a healthy balance between different types of activities. 
+
+	We aimed to develop algorithm that create balanced schedules that can be adapted to person to prioritize his or her needs.
 
 
-\section{Motivation}
-	The environment at a college campus is fast-paced and hectic more often than not.
+\section{Background and Motivation}
+	The primary motivation for pursuing this work was the perpetually active and hectic environment of a college campus, primarily with Harvey Mudd College in mind.
 	Students are faced with many academic obligations, from doing homework to attending class to studying for exams.
 	While focusing on academics is important and necessary, it is also valuable to have a healthy balance of different activities to support a student's personal wellbeing.
 	There are many ways for students to arrange their schedules, but rarely does a ``one size fits all'' approach work for creating students' schedules.
@@ -75,10 +71,18 @@ Scheduling, adaptive algorithm, nested algorithm, machine learning, big data
 	Events can be scheduled and canceled.
 	One may occasionally have to deal with an emergency that preclude all other scheduled activities.
 	Priorities can change.
+	\todo{``expand this section''}
 
+	For the remainder of this paper, we will use the terms \emph{events} and \emph{tasks} interchangeably to refer to an activity of some duration that should be added to a schedule.
 
-\section{Background}
+\section{General Approach}
+	To address scheduling in a way that took into account balance and personal preferences, we tried to mimic human intuition when possible.
+	Humans seem to intuitively prioritize tasks, but the ways that they do so can vary between different contexts and from person to person.
+	Therefore, we wanted to create algorithms that were \emph{adaptive}, in two senses of the word.
+	First, we wanted something that could take in a stream of tasks to schedule and \emph{adapt} according to when tasks are introduced.
+	Second, we needed an algorithm that could \emph{adapt} to an individual, taking into account the person's preferences and way of working.
 
+	We decided to use \emph{nested} algorithms that assigned events to a schedule in stages, where earlier stages schedule events more generally (i.e.~the week it will be scheduled), while the later stages arranged events more specifically (i.e. the exact time when the event should take place).
 
 \section{Algorithm for Personal Scheduling}
 
@@ -96,7 +100,7 @@ Scheduling, adaptive algorithm, nested algorithm, machine learning, big data
 	That is, 
 	\[ \mathbb{E}[t] = \sum_{a \in A} p_a(t). \]
 	If there are $m$ possible start times, then we can create a $1 \times m$ matrix $\mathbb{E}$ of the expected number of attendees at each time.
-	\[  % TODO Fix matrix formatting
+	\[  \todo{``Fix matrix formatting''}
 		\left[ \sum_{a \in A} p_a(t_1) \hspace{10} \sum_{a \in A} p_a(t_2) \hspace{10}  \cdots \hspace{10} \sum_{a \in A} p_a(t_n) \right]
 	\]
 
