@@ -1,0 +1,103 @@
+%% Use the hmcposter class with the thesis document-class option.
+\documentclass[thesis]{hmcposter}
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{booktabs}
+\usepackage{subfig}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{url}
+\usepackage{enumitem}
+\setlist{leftmargin=2cm, labelsep=0.7cm}
+
+%% Author of the thesis.
+\author{Stetson Bost}
+
+%% The year of your thesis poster's creation.
+\posteryear{2017}
+
+%% Thesis Title.
+\title{Adaptive Nested Algorithms\\for Balanced Scheduling}
+
+%% The name of the class for which the poster was created.
+%% Generally we see posters for thesis and Clinic, but sometimes
+%% other classes require or allow the creation of posters to
+%% communicate the results of a project.
+%% 
+%% Use the format Math nnn: Class Title.
+%\class{Math 197: Senior Thesis}
+
+%% Advisor(s) name or names.  Separate with \and.
+\advisor{Weiqing Gu}
+
+%% Reader(s) name or names.  Separate with \and.
+%\reader{Melissa O'Neill \and Charlie Watts}
+
+
+%% Define the \BibTeX command, used in our example document.
+\providecommand{\bibtex}{{\rmfamily B\kern-.05em%
+    \textsc{i\kern-.025em b}\kern-.08em%
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+
+\pagestyle{fancy}
+
+\begin{document}
+
+\begin{poster}
+
+\section{Background}
+Scheduling is very important for maintaining order, for both individuals and larger organizations.
+In a fast-paced environment like Harvey Mudd, creating schedules can help many people stay organized and manage stress.
+With this project, we wanted to develop algorithms that could help create effective schedules capable of adapting do an individual's preferences or style of working.
+
+\section{Algorithm for Personal Scheduling}%
+
+For an individual, such as a Harvey Mudd student, it can be important to create a schedule in order to figure out use their time effectively. 
+
+Our algorithm for creating a personal schedule aims to both accomplish all necessary tasks and maintain a balanced lifestyle.
+We treat a schedule as a collection of relatively short \emph{time slots}, and contiguous time slots can form \emph{blocks}.
+A group of consecutive blocks can form a \emph{section}, identified by it starting block and ending block.
+%TODO Explain what a task is (time slots, due dates, priority)
+The algorithm has three main components.
+\begin{enumerate}
+	\item
+		Distribute the tasks into sections of the schedule (on a scale larger than blocks), where all tasks within a section will be completed by the end of section.
+	\item
+		Assign tasks in each section to a block. 
+	\item
+		Schedule tasks within each block.
+\end{enumerate}
+
+
+
+
+
+
+\section{For Further Information}
+For more information about this project, please contact \url{sbost@hmc.edu} or \url{gu@hmc.edu}.
+
+
+\vfill
+\columnbreak
+
+
+\section{Algorithm for Event Scheduling}
+
+\section{Results}%
+
+\section{References}
+\bibliographystyle{hmcmath}
+%\bibliography{sampleposter}
+\vfill
+
+\section{Acknowledgments}
+I am very grateful to the Rose	Hills	Foundation Science \& Engineering Summer Undergraduate Research Fellowship program for their kind and generous support of this project.
+
+
+\vfill
+\end{poster}
+
+\end{document}
+
+ 
