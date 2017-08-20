@@ -35,16 +35,14 @@
 \begin{poster}
 
 \section{Introduction}
-Scheduling is very important for maintaining order, for both individuals and larger organizations.
-In a fast-paced environment like Harvey Mudd, schedules can help many people stay organized and manage stress.
-With this project, we wanted to develop algorithms capable of creating effective and adaptable schedules.
+Scheduling is very important for staying organized and managing stress for both individuals and larger organizations.
+With this project, we wanted to develop algorithms capable of creating effective, adaptable, and balanced schedules.
 
 \section{Algorithm for Personal Scheduling}%
-Our algorithm for creating a personal schedule aims to both accomplish all necessary tasks and maintain a balanced lifestyle.
-We treat a schedule as a collection of relatively short \emph{time slots}, and contiguous time slots can form \emph{blocks}.
-A group of consecutive blocks can form a \emph{section}, identified by it starting block and ending block.
-%TODO Explain what a task is (time slots, due dates, priority)
-The algorithm has three nested components.
+Our algorithm for creating personal schedules aims to accomplish all necessary tasks while maintaining a balanced schedule.
+A schedule is a collection of relatively short \emph{time slots}, and contiguous time slots can form \emph{blocks}.
+A group of consecutive blocks can form a \emph{section}, identified by it starting and ending blocks.
+The algorithm has three nested steps.
 \begin{enumerate}
 	\item
 		Assign tasks to sections.
@@ -53,67 +51,67 @@ The algorithm has three nested components.
 	\item
 		Assign tasks to time slots within blocks.
 \end{enumerate}
-Each of these steps takes into account various aspects of the tasks, including deadlines or available time windows, amount of time needed, and intensity. Additionally, each block has a minimum permissible amount of time reserved for non-work activities, which may or may not be structured, depending on user preference.
-With this non-work time and by maintaining as equal intensity levels as possible among blocks, this algorithm prioritizes a balanced schedule.
-%\includegraphics[scale=0.18]{TaskList.pdf}
-%\includegraphics[width=0.48\columnwidth]{Section.pdf}
-%\includegraphics[width=0.48\columnwidth]{Block.pdf}
-%\includegraphics[width=0.48\columnwidth]{Schedule.pdf}
+Each step takes into account various aspects of the tasks, including deadlines, estimated duration, and intensity. Additionally, each block has a minimum permissible amount of time reserved for non-work activities, which may or may not be structured, depending on user preference.
+By maintaining near equal intensity levels among blocks, the algorithm prioritizes a balanced schedule.
 
 \begin{figure}
   \centering
         \subfloat[][Start with a list of tasks that need to be completed.]{\includegraphics[scale=0.18]{TaskList.pdf}%
                 \label{fig:small-mults-orig}%
         }\qquad\qquad
-        \subfloat[][Create a section made up of time blocks, and assign tasks to the section. Non-work time is treated as a task.]{\includegraphics[scale=0.18]{Section.pdf}%
+        \subfloat[][Step 1: Create a section made up of time blocks, and assign tasks to the section. Non-work time is treated as a task.]{\includegraphics[scale=0.18]{Section.pdf}%
                 \label{fig:small-mults-45}%
         }\\
-        \subfloat[][Assign tasks to each block in the section.]{\includegraphics[scale=0.18]{Block.pdf}%
+        \subfloat[][Step 2: Assign tasks to each block in the section.]{\includegraphics[scale=0.18]{Block.pdf}%
                 \label{fig:small-mults-90}%
         }\qquad\qquad
-        \subfloat[][Schedule tasks within the block.]{\includegraphics[scale=0.18]{Schedule.pdf}%
+        \subfloat[][Step 3: Schedule tasks within the block.]{\includegraphics[scale=0.18]{Schedule.pdf}%
                 \label{fig:small-mults-135}%
         }
-  \caption[Small multiples]{Example for personal scheduling algorithm. Given a task list, assign tasks to sections, then to smaller blocks, then to time slots on the schedule.}%
+  \caption[Small multiples]{Example for personal scheduling algorithm.}%
   \label{fig:small-multiples}
 \end{figure}
 
+
+
+\section{For Further Information}
+For more information about this project, please contact \url{sbost@hmc.edu} or \url{gu@hmc.edu}.
 %\columnbreak
 
 
 \section{Algorithm for Event Scheduling}
 Members of a group often have to schedule events where a number people must attend.
 We wanted to create an algorithm capable of scheduling events with multiple attendees.
+An event can be either recurring (``regular'') or non-recurring (``special''), will have restrictions on available times, and may have a list of desired or required attendees.
 
-The event can be either recurring (``regular'') or non-recurring (``special''), has restrictions on available times, some desired or required attendees.
 \subsection{Probabilistic Approach}
-Using historic data, we can use a probabilistic version of the $k$-nearest neighbors algorithm to determine the likelihoods that all potential attendees will attend a specific event if it is scheduled at some potential times (Holmes).
+One approach is to use historic data and a probabilistic version of the $k$-nearest neighbors algorithm to determine the likelihoods that all potential attendees will attend a specific event scheduled at potential times (Holmes).
 By summing these likelihoods across all attendees, we are able to get the expected value for the number of people at the event.
 
-\subsection{TODO Title (Approach 2)}
-This approach make use of the Personal Scheduling algorithm detailed to the left with some slight modifications.
+\subsection{Nested Approach}
+An alternate approach makes use of the nested personal scheduling algorithm detailed to the left with some slight modifications.
+The basic structure of time slots, blocks, and sections is still the same, but it may be less likely to have adjacent blocks or contiguous sections, depending on the group's scheduling practices.
+We treat events as tasks with possible time windows, and use those to create sections.
+In place of task intensity, we use a quantity that describes the priority of the event.
+We also create some conditions for balance, such as demands on the frequency of regular and special events.
+
 
 \section{Future Work}
-To further validate this work, it will be useful to test the algorithms on actual scheduling problems.
-For the personal scheduling algorithm, it will be helpful to collect schedule data from individuals who are interested in applying the algorithm to their own schedules. Their feedback can be used to evaluate and revise the algorithm to better suit their needs preferences.
-For event scheduling, data would need to be collected from an organization, preferably one that is willing to use the algorithm to schedule their events.
-Additionally, for an organization that uses a common calendar application, it would be interesting to integrate the event scheduling algorithms with the calendar to automatically schedule events.
-
+A good next step for this work would be to use code implement the algorithms so that they can be tested on a group of people.
+To further validate the algorithms, it will be useful to test the algorithms on actual scheduling problems.
+Ideally this testing should be with people and groups that are willing to try the schedules produced by the algorithm.
+Additionally, for an group that uses a common calendar application, it might be possible to integrate the event scheduling algorithms with the calendar to automatically schedule events.
 
 
 \section{References}
 \bibliographystyle{hmcmath}
 %\bibliography{sampleposter}
-C.~C.~Holmes and N.~M.~Adams. \emph{A probabilistic nearest neighbour method for statistical pattern recognition} (2002). \url{http://hedibert.org/wp-content/uploads/2016/02/holmes-adams-2002.pdf}
-
-
-\section{For Further Information}
-For more information about this project, please contact \url{sbost@hmc.edu} or \url{gu@hmc.edu}.
+C.~C.~Holmes and N.~M.~Adams, 2002. \emph{A probabilistic nearest neighbour method for statistical pattern recognition}. \url{http://hedibert.org/wp-content/uploads/2016/02/holmes-adams-2002.pdf}.
 
 
 \section{Acknowledgments}
-I would like to thank Professor Weiqing Gu for her guidance throughout this research.
-I am also very grateful to the Rose	Hills	Foundation Science \& Engineering Summer Undergraduate Research Fellowship program for their kind and generous support of this project.
+I would like to thank my advisor, Professor Weiqing Gu, for her guidance throughout this research.
+I am also very grateful for the kindness and generosity of the Rose Hills Foundation through their Science and Engineering Summer Undergraduate Research Fellowship, which has made this project possible.
 
 
 \end{poster}
