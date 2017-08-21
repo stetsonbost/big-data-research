@@ -35,7 +35,7 @@
 \begin{poster}
 
 \section{Introduction}
-Scheduling is very important for staying organized and managing stress for both individuals and all kinds of organizations.
+Scheduling is very important for staying organized and managing stress for both individuals and organizations of all kinds.
 For this project, we developed algorithms that create effective, adaptable, and balanced schedules.
 
 \section{Algorithm for Personal Scheduling}
@@ -60,7 +60,7 @@ By maintaining similar intensity levels among blocks, the algorithm favors a bal
 % tasks to timeslots considering personal needs (ADAPTIVE)
 \begin{figure}
   \centering
-        \subfloat[][Start with a list of tasks that need to be completed. Each task has a deadline, estimated duration, and an intensity level, where a higher intensity level corresponds to a more difficult or stressful task.]{\includegraphics[scale=0.152]{TaskList.pdf}%
+        \subfloat[][Start with a list of tasks that need to be completed. Each task has a deadline, estimated duration, and intensity level, where a higher intensity level corresponds to a more difficult or stressful task.]{\includegraphics[scale=0.152]{TaskList.pdf}%
                 \label{fig:small-mults-orig}%
         }\qquad\qquad
         \subfloat[][Step 1: Create a section made up of time blocks, and assign tasks to the section, prioritizing tasks with the soonest deadlines. Some amount of non-work time is associated with each block, and we treat non-work time as a task.]{\includegraphics[scale=0.152]{Section.pdf}%
@@ -83,17 +83,17 @@ For more information about this project, please contact \url{sbost@hmc.edu} or \
 
 \section{Algorithm for Event Scheduling}
 We developed two algorithms for scheduling events within groups.
-Members of a group often have to arrange events where a number people must attend.
+Members of a group often have to arrange events where a number of people must attend.
 An event may be either recurring (``regular'') or non-recurring (``special''), may have restrictions on available times, and may have a list of desired or required attendees.
 
 \subsection{Probabilistic Approach}
-We created an algorithm for event scheduling that uses historic data and a probabilistic version of the $k$-nearest neighbors algorithm to determine the likelihoods that all potential attendees will attend a specific event scheduled at potential times (Holmes and Adams, 2002).
+We created an algorithm for event scheduling that uses historic data and a probabilistic version of the $k$-nearest neighbors algorithm to determine the likelihoods that all potential attendees will attend a specific event scheduled at a given time (Holmes and Adams, 2002).
 By summing these likelihoods across all attendees, we are able to get the expected value for the number of people at the event.
 
 \subsection{Nested Approach}
 We also developed a nested algorithm that makes use of the nested personal scheduling algorithm detailed to the left with some slight modifications.
 The basic structure of time slots, blocks, and sections is the same, but it may be less likely to have adjacent blocks or contiguous sections, depending on the group's scheduling practices.
-We treat events as tasks with possible time windows, and use those to create sections.
+We treat events as tasks with possible time windows and use those to create sections.
 In place of task intensity, we use a quantity that describes the priority of the event.
 We also introduce some conditions for balance, such as restrictions on the frequency of regular and special events.
 
@@ -101,8 +101,8 @@ We also introduce some conditions for balance, such as restrictions on the frequ
 \section{Discussion and Future Work}
 We are in the process of running the algorithms with a large data set.
 
-In the future, these algorithms could be used with people and groups that are willing to try schedules that are produced.
-Additionally, for an organization that uses a common calendar application, it might be possible to integrate the event scheduling algorithms with the calendar to automatically schedule events.
+In the future, these algorithms could be used with individuals and groups that are willing to try schedules that are produced.
+Additionally, for an organization that uses a common calendar application, there may be potential to integrate the event scheduling algorithms with the calendar to automatically schedule events.
 
 
 \section{References}
