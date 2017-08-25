@@ -163,6 +163,7 @@ Scheduling, adaptive algorithm, nested algorithm, machine learning, big data
 	(For our example, we use four- and five-hour blocks.)
 	In order to have balance, we allow each block to have some (minimum) amount of mandatory non-work time (i.e.~time when a student is not doing academic-related activities).
 	A \textit{section} refers to a group of blocks, and is the largest amount of time that we will deal with in this algorithm.
+	A section is identified by a list of blocks in that section, and sections cannot share blocks (i.e~no overlap between sections).
 	Note that time slots, blocks, and sections are not necessarily fixed amounts of time.
 	Rather, their lengths and composition are meant to be adaptable to the user's situation or preferences.
 
@@ -185,7 +186,7 @@ Scheduling, adaptive algorithm, nested algorithm, machine learning, big data
 
 	\subsection{Assign Tasks to Sections}
 		
-		There is a list of blocks that belong in each section.
+		
 		%		For a college student, this is usually the day a not-yet-completed homework assignment is due.
 		
 		The goal of this step is to take a list of tasks and assign some of them to the next available section.
