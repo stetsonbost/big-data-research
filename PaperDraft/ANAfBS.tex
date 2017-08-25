@@ -64,7 +64,7 @@ Scheduling, adaptive algorithm, nested algorithm, machine learning, big data
 	In a fast-paced world, it can be important to effectively plan one's schedule in a way that is conducive to productivity while prioritizing the importance of a healthy balance between different types of activities. 
 	\todo{mention need and widespread use of scheduling/applications for calenders}
 
-	We aimed to develop algorithm that create balanced schedules that can be adapted to person to prioritize his or her needs.
+	We developed algorithms that create balanced schedules that can be adapted to person to prioritize his or her needs.
 
 
 \section{Background and Motivation}
@@ -84,6 +84,12 @@ Scheduling, adaptive algorithm, nested algorithm, machine learning, big data
 
 	Additionally, schedules are inherently dynamic.
 	Events can be scheduled and canceled, an individual may occasionally have to deal with an emergency that preclude all other scheduled activities, and priorities can change frequently.
+	
+	At first glance, one might consider algorithms that solve Job Shop Scheduling (JSS) problems, which comes from operations research, but most algorithms for JSS are primarily concerned with optimization. \todo{cite this}
+	This poses a problem for actual human schedules, because the ``optimal'' solution might not result in the most healthy or balanced schedule when people actually attempt to follow it.
+	
+	There is a need for algorithms that are capable of creating balanced, adaptable schedules.
+	We wanted to create algorithms that could do this in a way that tries to capture human intuition through algorithmic and machine learning techniques.
 	\todo{expand this section}
 
 \section{Examples of Scheduling Problems}
@@ -95,6 +101,8 @@ Scheduling, adaptive algorithm, nested algorithm, machine learning, big data
 	 	Another example might be an (office) employee's work schedule. This can be considered on different time scales. For a day, the employee might need a schedule that includes when he or she should start and end, what time different tasks or meetings will take place, and when to have meals and breaks. With a longer timescale, such as a month or quarter, the employee might need to schedule which days to work on different projects, when training or business trips will take place, and when to take personal time off from work.
  	\item 
 	 	An elementary school teacher has required standards that his or her students must meet. The teacher must create a flexible schedule for the academic year that plans when to cover different topics in order to meet the requirements. Additionally, the teacher may need to plan for field trips, ``slack'' days (in case the class falls behind schedule), as well as incorporate a larger school-wide schedule including events such as assemblies, parent-teacher conferences, and breaks. The teacher may divide the topics into units, and the calendar into months or weeks. Depending on the pace of the class throughout the year, the schedule may need to be adjusted to either move faster or slower later on.
+	\item
+		A working parent may be at their workplace for a large portion of the day, but they also need plan their schedule to balance their work with family time each day.
  	\item
 	 	A family on vacation may have a list of activities they want to do while visiting a particular place before they leave.
 	\item
@@ -103,6 +111,8 @@ Scheduling, adaptive algorithm, nested algorithm, machine learning, big data
 	 	An academic department at a college may need to schedule regular tutoring session for several classes so that most students in those classes and all the tutors can attend. The department may also have special events on occasion, such as guest lecturers, that must be scheduled such that attendance is expected to be high enough to fill a lecture hall.
 	\item	
 	 	A manager at a company may need to schedule weekly meetings with some of her employees as well as a meeting to make a special announcement with a large group of employees in attendance.
+	\item
+		A doctor's office may have many patients who want or need to schedule appointments. Some need annual checkups, some want to come in to discuss a recently developed pain, and others may urgently need medical help from their doctor. The office must give priority to the most urgent issues and make sure those patients get scheduled as soon as possible.
 	\end{itemize}
 
 \section{General Approach}
@@ -113,7 +123,7 @@ Scheduling, adaptive algorithm, nested algorithm, machine learning, big data
 	% fill in required/regular slots first
 	% then other important things, ...
 	% can talk about more specific for HMC (Core courses first, then this, then this... etc.)
-	To address scheduling in a way that took into account balance and personal preferences, we tried to mimic human intuition when possible.
+	To address scheduling in a way that took into account balance and personal preferences, we wanted to use machine learning and mimic human intuition when possible.
 	In general, humans will schedule regular (recurring) events first, then schedule events from high priority to low priority.\todo{CITE THIS: psychology}
 	Humans seem to intuitively prioritize tasks, but the ways that they do so can vary between different contexts and from person to person.
 	Therefore, we wanted to create algorithms that were \emph{adaptive}, in two senses of the word.
@@ -122,15 +132,19 @@ Scheduling, adaptive algorithm, nested algorithm, machine learning, big data
 
 	We decided to use \emph{nested} algorithms that assigned events to a schedule in stages, where earlier stages schedule events more generally (i.e.~the week it will be scheduled), while the later stages arranged events more specifically (i.e.~the exact time slot when the event should take place).
 
-\section{Algorithm for Personal Scheduling}
-	The goal of this personal scheduling is to create a personal schedule that will accomplish as much as is necessary while still promoting a balanced lifestyle.
+\section{Nested Algorithm for Personal Scheduling}
+	We created an algorithm that aims to use the power of machine learning to make a user's personal schedule.
+	We wanted our algorithm to schedule the tasks that the user has specified while promoting a balanced lifestyle.
+	The idea of a \emph{balanced lifestyle} can vary greatly from person to person.
+	Therefore, we need an algorithm that can adapt to the type of balance that suits the individual.
+
 	We will be using a college student's daily schedule, but this can be generalized to other situations that involve schedules.
 	In order to have balance, it is valuable to have both work and non-work activities in the schedule.
 
 	Necessary information for this algorithm is the time during which tasks can occur (i.e.~times when the person will be awake) and a stream of tasks to be completed.
 	Each task has some additional information associated with it:
 	\begin{itemize}
-		\item deadline to complete the task or exact time frame to complete task (i.e. if the task is a scheduled event such as a lecture),
+		\item deadline to complete the task or exact time frame to complete task (i.e.~if the task is a scheduled event such as a lecture),
 		\item estimated amount of time needed to complete the task,
 		\item intensity level (a rough proxy for amount of concentration needed to effectively perform the task), and
 		\item whether the task is work or non-work.
@@ -148,11 +162,11 @@ Scheduling, adaptive algorithm, nested algorithm, machine learning, big data
 	This time may be as structured or unstructured as the user desires, allowing flexibility to adapt to the user's preferences.
 	Examples of activities that can occur during non-work time include eating, exercise, spending time with friends, napping, etc.
 
-	The algorithm consists of three main parts.
+	The algorithm consists of three nested steps.
 	\begin{enumerate}
-		\item Distribute the tasks into sections of the schedule (on a scale larger than blocks), where all tasks within a section will be completed by the end of section.
-		\item Assign tasks in each section to a block. 
-		\item Schedule tasks within each block.
+		\item Distribute the tasks into sections of the schedule (on a scale larger than blocks), where all tasks within a section will be completed by the end of section. The goal of this step is to make sure all tasks are scheduled to be completed by their deadlines.
+		\item Assign tasks in each section to a block. The goal of this step is to maintain a balance of intensity levels across the blocks within a section.
+		\item Schedule tasks within each block. The goal of this step is to adapt to the user's preferences.
 	\end{enumerate}
 	
 	We need to start with a list fo assignments sorted by due date, with the soonest deadline first.
@@ -162,7 +176,8 @@ Scheduling, adaptive algorithm, nested algorithm, machine learning, big data
 
 	\subsection{Assign Tasks to Sections}
 		A \textit{section} refers to a time period that ends in an upcoming deadline or due date for which there are still tasks to be completed.
-		For a college student, this is usually the day a not-yet-completed homework assignment is due.
+		There is a list of blocks that belong in each section.
+		%		For a college student, this is usually the day a not-yet-completed homework assignment is due.
 		
 		The goal of this step is to take a list of tasks and assign some of them to the next available section.
 		
@@ -231,7 +246,7 @@ Scheduling, adaptive algorithm, nested algorithm, machine learning, big data
 		Determining the probabilities for attending the events can be learned from modifications to the classic machine learning $k$-Nearest Neighbors.
 		However, this method may be too slow, so the following algorithm may be used instead.
 		
-	\subsection{}
+	\subsection{Nested Approach}
 		This follows the the personal scheduling algorithm described previously, with only slight adaptations.
 		
 		Each event is considered a task where the constraints include the times when the event can (or cannot) occur, required attendees, priority in scheduling the event.
@@ -240,60 +255,14 @@ Scheduling, adaptive algorithm, nested algorithm, machine learning, big data
 
 
 \section{Data}
-	We have not yet used a real data set on which to test our algorithms.
-	Historic data could be collected from the Harvey Mudd community through a combination of techniques such as online surveys and in-person interviews.
-	% TODO UCI may have data available
-	% http://archive.ics.uci.edu/ml/index.php
-
-% \newpage
-
-
-% \newpage
-% \section{Goals for Schedules}
-% 	Make sure everything that is necessary gets done by the time it must be completed.
-
-% 	Make sure there is some reasonable/healthy amount of ``slack time'' of personal time (if applicable).
-
-% 	Want to design a cost function that can measure how ``balanced'' a schedule is
-
-% 	When some cost function is applied to some time period (day, week, etc.), we want to minimize variance in the total cost among the time periods.
-
-% \newpage
-% \section{Algorithm}
-% 	Each task has some time frame in which it must be completed and an associated intensity level corresponding roughly to the estimated amount of (mental) concentration needed to (effectively) perform the task. 
-
-% 	A schedule is made up of timeslots. For our algorithm, a \emph{timeslot} refers to the smallest period of time the algorithm will be dealing with. This can be 1 minute, 15 minutes, half an hour, 1 hour, etc.
-% 	The schedule is preliminarily divided into blocks of time.
-% 	(For our example, we use four- to five-hour blocks.)
-
-% 	There may be some tasks that have to occur at specific times (i.e.~meetings, classes, etc.) regardless of other tasks in the schedule.
-
-% 	The algorithm consists of three main parts.
-% 	\begin{enumerate}
-% 		\item Distribute the tasks into sections of the schedule (on a scale larger than blocks), where all tasks within a section will be completed by the end of section.
-% 		\item Assign tasks in each section to a block. 
-% 		\item Schedule tasks within each block.
-% 	\end{enumerate}
-
-% \newpage
-% \subsection{Tasks to Sections}
-% \todo{}
-% \vspace{2.5in}
-
-% \subsection{Tasks to Blocks}
-% \todo{}
-% \vspace{2.5in}
-% \subsection{Tasks to Timeslots}
-% \todo{}
-
-% \newpage
-% \section{Personal Example}
-% \todo{}
-% \vspace{5in}
-
-
+	We used data from the American Time Use Survey (ATUS) to test our algorithms.
+	In order to extract the most useful items in this data set, we used the ATUS-X extraction tool, provided by IPUMS for their Time Use project.
+	%	We have not yet used a real data set on which to test our algorithms.
+	%	Historic data could be collected from the Harvey Mudd community through a combination of techniques such as online surveys and in-person interviews.
+	
 
 \subsubsection*{Acknowledgments}
+We would like to thank the Rose Hills Foundation for their generous support of this research.
 \todo{}
 \section*{References}
 \todo{}
