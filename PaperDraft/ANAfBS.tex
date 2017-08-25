@@ -139,15 +139,19 @@ Scheduling, adaptive algorithm, nested algorithm, machine learning, big data
 	Therefore, we need an algorithm that can adapt to the type of balance that suits the individual.
 
 	We will be using a college student's daily schedule, but this can be generalized to other situations that involve schedules.
-	In order to have balance, it is valuable to have both work and non-work activities in the schedule.
+	In order to have balance, it is valuable to have both work and non-work time in the schedule.
+	Non-work time may be as structured or unstructured as the user desires, allowing flexibility to adapt to the user's preferences.
+	Examples of uses of non-work activities are eating, exercise, spending time with friends, napping, etc.
+	This time is meant to be a significant change from what is considered to be work (i.e~academic activities).
 
-	Necessary information for this algorithm is the time during which tasks can occur (i.e.~times when the person will be awake) and a stream of tasks to be completed.
+	Necessary information for this algorithm is the time during which tasks can occur and a stream of tasks to be completed.
+	Tasks can be introduced into this stream at any point in time, and the algorithm should be able to adapt to the schedule to accommodate new or modified tasks accordingly.
 	Each task has some additional information associated with it:
 	\begin{itemize}
-		\item deadline to complete the task or exact time frame to complete task (i.e.~if the task is a scheduled event such as a lecture),
+		\item deadline to complete the task or exact time frame to complete task (i.e.~if the task is a scheduled event such as a lecture or lab),
 		\item estimated amount of time needed to complete the task,
 		\item intensity level (a rough proxy for amount of concentration needed to effectively perform the task), and
-		\item whether the task is work or non-work.
+		\item whether the task is considered work or non-work.
 	\end{itemize}
 	In order to get the intensity level, this can either be a user-inputted setting, or it can be learned from historical data (provided by the student) using a variety of machine learning algorithms.
 
@@ -157,17 +161,22 @@ Scheduling, adaptive algorithm, nested algorithm, machine learning, big data
 	A schedule is made up of time slots. For our algorithm, a \emph{time slot} refers to the smallest period of time the algorithm will be dealing with. This can be 1 minute, 15 minutes, 1 hour, 1 day, etc.
 	The schedule is preliminarily divided into \emph{blocks} made up of some number of time slots.
 	(For our example, we use four- and five-hour blocks.)
-	
-	In order to have balance, each block is required to have some (minimum) amount of non-work time (i.e.~time when a student is not doing academic-related activities). 
-	This time may be as structured or unstructured as the user desires, allowing flexibility to adapt to the user's preferences.
-	Examples of activities that can occur during non-work time include eating, exercise, spending time with friends, napping, etc.
+	In order to have balance, we allow each block to have some (minimum) amount of mandatory non-work time (i.e.~time when a student is not doing academic-related activities).
+	A \textit{section} refers to a group of blocks, and is the largest amount of time that we will deal with in this algorithm.
+	Note that time slots, blocks, and sections are not necessarily fixed amounts of time.
+	Rather, their lengths and composition are meant to be adaptable to the user's situation or preferences.
 
 	The algorithm consists of three nested steps.
+	These steps proceed from largest time granularity to smallest time granularity, meaning it first deals with sections, then blocks, then time slots.
+	These are the steps:
 	\begin{enumerate}
 		\item Distribute the tasks into sections of the schedule (on a scale larger than blocks), where all tasks within a section will be completed by the end of section. The goal of this step is to make sure all tasks are scheduled to be completed by their deadlines.
 		\item Assign tasks in each section to a block. The goal of this step is to maintain a balance of intensity levels across the blocks within a section.
 		\item Schedule tasks within each block. The goal of this step is to adapt to the user's preferences.
 	\end{enumerate}
+	Note that after step 1 fills one section, we can immediately proceed to step 2 for the section that is completed.
+	Similarly, once a block is filled in step 2, we can proceed to step 3 for that block.
+	This allows for parallelization of this algorithm.
 	
 	We need to start with a list fo assignments sorted by due date, with the soonest deadline first.
 	If multiple assignments have the same deadline, then sort those assignment by intensity, with the most intense first.
@@ -175,7 +184,7 @@ Scheduling, adaptive algorithm, nested algorithm, machine learning, big data
 	After this, the order is arbitrary.
 
 	\subsection{Assign Tasks to Sections}
-		A \textit{section} refers to a time period that ends in an upcoming deadline or due date for which there are still tasks to be completed.
+		
 		There is a list of blocks that belong in each section.
 		%		For a college student, this is usually the day a not-yet-completed homework assignment is due.
 		
